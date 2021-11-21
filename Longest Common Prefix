@@ -1,0 +1,36 @@
+class Solution{
+public:
+    vector<int> longestCommonPrefix(string str1, string str2){
+        // code here
+        // unordered_map<string,bool> mp;
+        // int l=str2.length();
+        // for(int i=0;i<l;i++)
+        // {
+        //     string s;
+        //     s+=str2[i];
+        //     for(int j=i+1;j<l;j++)
+        //     {
+        //         s+=str2[j];
+        //         mp[s]=true;
+        //     }
+        //     s.clear();
+        // }
+        // string t;
+        // int z=0;
+        // for(int i=0;i<str1.length();i++)
+        // {
+        //     t+=str1[i];
+        //     if(mp.find(t)!=mp.end()) z=i;
+        // }
+        // return {0,z};
+        string s;
+        int z=-1;
+        for(int i=0;i<str1.length();i++)
+        {
+            s+=str1[i];
+            if(str2.find(s)!=string::npos) z=i;
+        }
+        if(z==-1) return {-1};
+        return {0,z};
+    }
+};
