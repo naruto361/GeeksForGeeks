@@ -1,0 +1,26 @@
+int findmax(Node *root)
+{
+    if(root->right) findmax(root->right);
+    else return root->data;
+}
+Node *deleteNode(Node *root, int X) {
+    // your code goes here
+    if(!root) return NULL;
+    if(X < root->data)
+        root->left = deleteNode(root->left,X);
+    else if(X > root->data)
+        root->right = deleteNode(root->right,X);
+    else
+    {
+        if(!root->left && !root->right) return NULL;
+        else if(!root->right) return root->left;
+        else if(!root->left) return root->right;
+        else
+        {
+            int lmax=findmax(root->left);
+            root->data = lmax;
+            root->left = deleteNode(root->left,lmax);
+        }
+        return root;
+    }
+}
