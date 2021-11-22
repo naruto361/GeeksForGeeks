@@ -1,0 +1,22 @@
+// similar to jump game 2 LeetCode
+class Solution{
+  public:
+    int minJumps(int arr[], int n){
+        // Your code here
+        if(n==1) return 0;
+        int r = 0;
+        int maxidx = 0, ans = 0;
+        for(int i=0;i<n;i++)
+        {
+            r=max(r,i+arr[i]);
+            if(r<=i) return -1;
+            if(i==maxidx)
+            {
+                if(maxidx >= n-1) break;
+                ans++;
+                maxidx=r;
+            }
+        }
+        return ans;
+    }
+};
