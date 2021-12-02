@@ -1,0 +1,32 @@
+class Solution
+{
+  public:
+    //Function to find maximum of each subarray of size k.
+    vector <int> max_of_subarrays(int *arr, int n, int k)
+    {
+        // your code here
+        stack<int> st;
+        vector<int> nextG(n,n);
+        for(int i=0;i<n;i++)
+        {
+            while(!st.empty() && arr[i]>arr[st.top()])
+            {
+                nextG[st.top()]=i;
+                st.pop();
+            }
+            st.push(i);
+        }
+        vector<int> ans(n-k+1,n);
+        int j=0;
+        for(int i=0;i<=n-k;i++)
+        {
+            if(j<i) j=i;
+            while(nextG[j]<i+k)
+            {
+                j=nextG[j];
+            }
+            ans[i]=arr[j];
+        }
+        return ans;
+    }
+};
