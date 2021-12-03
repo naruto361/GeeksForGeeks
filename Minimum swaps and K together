@@ -1,0 +1,37 @@
+class Solution
+{
+public:
+    int minSwap(int arr[], int n, int k) {
+        // Complet the function
+        //int f[n]={0};
+        // if(arr[0]<=k) f[0]++;
+        // for(int i=1;i<n;i++)
+        // {
+        //     f[i]=f[i-1];
+        //     if(arr[i]<=k) f[i]++;
+        // }
+        // int l=f[n-1];
+        // if(l<2) return 0;
+        // int maxi=f[l-1];
+        // for(int i=l;i<n;i++)
+        // {
+        //     maxi=max(maxi , f[i]-f[i-l]);
+        // }
+        // return l-maxi;
+        if(arr[0]<=k) arr[0]=1;
+        else arr[0]=0;
+        for(int i=1;i<n;i++)
+        {
+            if(arr[i]<=k) arr[i]=1+arr[i-1];
+            else arr[i]=arr[i-1];
+        }
+        int l=arr[n-1];
+        if(l<2) return 0;
+        int maxi=arr[l-1];
+        for(int i=l;i<n;i++)
+        {
+            maxi = max(maxi , arr[i]-arr[i-l]);
+        }
+        return l-maxi;
+    }
+};
