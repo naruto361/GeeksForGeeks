@@ -1,0 +1,71 @@
+class Solution {
+  public:
+  int solve(int Arr[],int N,int mid)
+  {
+      // 1st
+    //   int ans =0;
+    //     sort(Arr,Arr+N);
+    //     for(int i=0;i<N-2;i++)
+    //     {
+    //         int j=i+1,k=N-1;
+    //         while(j<k){
+    //             int x=Arr[i]+Arr[j]+Arr[k];
+    //             if(x>mid) k--;
+    //             else 
+    //             {
+    //                 ans+=(k-j);
+    //                 j++;
+    //             }
+    //         }
+    //     }
+    //     return ans;
+    
+    // 2nd
+      int ans =0;
+        sort(Arr,Arr+N);
+        for(int i=0;i<N-2;i++)
+        {
+            int j=i+1,k=N-1;
+            while(j<k){
+                int x=Arr[i]+Arr[j]+Arr[k];
+                if(x<=mid) j++;
+                else 
+                {
+                    ans+=(k-j);
+                    k--;
+                }
+            }
+        }
+        return ans;
+  }
+    int countTriplets(int Arr[], int N, int L, int R) {
+        // code here
+        // 1. sum less than equal to R - sum less than equal to (L-1)
+        // OR
+        // 2. sum>(L-1) - sum>R
+        
+        // for 1st
+        //return solve(Arr,N,R) - solve(Arr,N,L-1);
+        
+        // for 2nd
+        return solve(Arr,N,L-1) - solve(Arr,N,R);
+        
+    }
+};
+
+// { Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N;
+        cin >> N;
+        int Arr[N];
+        for (int i = 0; i < N; i++) cin >> Arr[i];
+        int L, R;
+        cin >> L >> R;
+        Solution obj;
+        cout << obj.countTriplets(Arr, N, L, R) << endl;
+    }
+    return 0;
+}  // } Driver Code Ends
