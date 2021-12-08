@@ -1,0 +1,25 @@
+class Solution
+{
+    public:
+        int closestToZero(int arr[], int n)
+        {
+            // your code here 
+            sort(arr,arr+n);
+            int ans=INT_MAX;
+            int l=0,r=n-1;
+            while(l<r)
+            {
+                int x=arr[l]+arr[r];
+                if(abs(x)<abs(ans))
+                {
+                    ans=x;
+                }
+                if(abs(x)==abs(ans))
+                    ans=max(ans,x);
+                if(x<0) l++;
+                else r--;
+            }
+            return ans;
+            
+        }
+};
