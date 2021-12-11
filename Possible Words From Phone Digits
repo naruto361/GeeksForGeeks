@@ -1,0 +1,34 @@
+class Solution
+{
+    public:
+    //Function to find list of all words possible by pressing given numbers.
+    vector<string> ans;
+    void solve(int a[],int N,int idx,string temp,map<int,vector<char>> &mp)
+    {
+        if(idx==N)
+        {
+            ans.push_back(temp);
+            return;
+        }
+        int c=a[idx];
+        for(auto &i:mp[c])
+        {
+            solve(a,N,idx+1,temp+i,mp);
+        }
+    }
+    vector<string> possibleWords(int a[], int N)
+    {
+        //Your code here
+        map<int,vector<char>> mp;
+        mp[2]={'a','b','c'};
+        mp[3]={'d','e','f'};
+        mp[4]={'g','h','i'};
+        mp[5]={'j','k','l'};
+        mp[6]={'m','n','o'};
+        mp[7]={'p','q','r','s'};
+        mp[8]={'t','u','v'};
+        mp[9]={'w','x','y','z'};
+        solve(a,N,0,"",mp);
+        return ans;
+    }
+};
