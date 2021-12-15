@@ -1,0 +1,21 @@
+vector<long long> printFirstNegativeInteger(long long int A[],
+                                             long long int N, long long int K) {
+                                             // TC = O(NlogN)
+        vector<int> negidx;
+        for(int i=0;i<N;i++)
+        {
+            if(A[i]<0) negidx.push_back(i);
+        }
+        vector<long long> ans;
+        for(long long int i=0;i<=N-K;i++)
+        {
+            auto it=lower_bound(negidx.begin(),negidx.end(),i);
+            if(it==negidx.end() || *it>=i+K) ans.push_back(0);
+            else
+            {
+                ans.push_back(A[*it]);
+            }
+        }
+        return ans;
+                                                 
+ }
