@@ -1,0 +1,32 @@
+class Solution
+{
+    public:
+    void merge(int arr[], int l, int m, int r)
+    {
+         // Your code here
+         vector<int> temp (r-l+1,0);
+         int i1=l,i2=m+1;
+         int idx=0;
+         while(i1<=m && i2<=r)
+         {
+             if(arr[i1]<=arr[i2])
+             {
+                 temp[idx++]=arr[i1++];
+             }
+             else temp[idx++]=arr[i2++];
+         }
+         while(i1<=m) temp[idx++]=arr[i1++];
+         while(i2<=r) temp[idx++]=arr[i2++];
+         for(int i=0,j=l;i<temp.size();i++,j++) arr[j]=temp[i]; 
+    }
+    public:
+    void mergeSort(int arr[], int l, int r)
+    {
+        //code here
+        if(l>=r) return ;
+        int mid=l+(r-l)/2;
+        mergeSort(arr,l,mid);
+        mergeSort(arr,mid+1,r);
+        merge(arr,l,mid,r);
+    }
+};
