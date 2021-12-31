@@ -1,0 +1,44 @@
+class Solution
+{
+    public:
+    //Function to evaluate a postfix expression.
+    int evaluatePostfix(string S)
+    {
+        // Your code here
+        stack<int> st;
+    for(char &c:S)
+    {
+        if(st.empty())
+        {
+            st.push(c-'0');
+            continue;
+        }
+        int k=st.top();
+        if(c=='+')
+        {
+            st.pop();
+            st.top()+=k;
+        }
+        else if(c=='-')
+        {
+            st.pop();
+            st.top()-=k;
+        }
+        else if(c=='*')
+        {
+            st.pop();
+            st.top()*=k;
+        }
+        else if(c=='/')
+        {
+            st.pop();
+            st.top()/=k;
+        }
+        else
+        {
+            st.push(c-'0');
+        }
+    }
+    return st.top();
+    }
+};
