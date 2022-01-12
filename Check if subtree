@@ -1,0 +1,52 @@
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+};
+ */
+
+class Solution
+{
+  public:
+    //Function to check if S is a subtree of tree T.
+    bool ok(Node* T,Node* S)
+    {
+        if(!T && !S) return true;
+        if(!T || !S) return false;
+        if(T->data != S->data) return false;
+        return ok(T->left,S->left) && ok(T->right,S->right);
+    }
+    bool isSubTree(Node* T, Node* S) 
+    {
+        // Your code here
+        if(!T) return false;
+        if(!S) return true;
+        if(ok(T,S)) return true;
+        return isSubTree(T->left ,S) || isSubTree(T->right,S);
+        
+    }
+};
+
+// { Driver Code Starts.
+
+int main() {
+    int tc;
+    scanf("%d ", &tc);
+    while (tc--) {
+        string strT, strS;
+        getline(cin, strT);
+        Node *rootT = buildTree(strT);
+        getline(cin, strS);
+        Solution obj;
+        Node *rootS = buildTree(strS);
+        cout << obj.isSubTree(rootT, rootS) << "\n";
+
+    }
+    return 0;
+}
