@@ -1,0 +1,30 @@
+class Solution{
+    public:
+    vector<int> dx={1,0,0,-1};
+    vector<int> dy={0,-1,1,0};
+        void solve(int r,int c,vector<vector<int>>&m,int n,string ans,vector<string> &result)
+        {
+            if(r<0 || r>=n || c<0 || c>=n || m[r][c]==0) return ;
+            if(r==n-1 && c==n-1)
+            {
+                result.push_back(ans);
+                return ;
+            }
+            m[r][c]=0;
+            string dir="DLRU";
+            for(int i=0;i<4;i++)
+            {
+                solve(r+dx[i],c+dy[i],m,n,ans+dir[i],result);
+            }
+            m[r][c]=1;
+        }
+    
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        string ans ="";
+        vector<string> result;
+        solve(0,0,m,n,ans,result);
+        //sort(result.begin(),result.end());
+        return result;
+    } 
+};
