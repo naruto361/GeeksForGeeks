@@ -1,0 +1,25 @@
+class Solution{
+  public:
+    // root : the root Node of the given BST
+    // target : the target sum
+    unordered_map<int,int> mp;
+    bool ok=false;
+    void solve(struct Node* root,int target)
+    {
+        if(!root) return ;
+        if(root->left) solve(root->left,target);
+        if(mp.find(target-root->data)!=mp.end())
+        {
+            ok=true;
+            return ;
+        }
+        mp[root->data]++;
+        if(root->right) solve(root->right,target);
+    }
+    int isPairPresent(struct Node *root, int target)
+    {
+    //add code here.
+        solve(root,target);
+        return ok;
+    }
+};
