@@ -1,0 +1,19 @@
+class Solution
+{
+    public:
+    int mod=1e9+7;
+    int solve(int i,int j,string &S,string &T,vector<vector<int>> &dp)
+    {
+        if(j==T.length()) return 1;
+        if(i==S.length()) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(S[i]==T[j]) return dp[i][j] = (solve(i+1,j+1,S,T,dp) + solve(i+1,j,S,T,dp))%mod;
+        return dp[i][j] = solve(i+1,j,S,T,dp);
+    }
+    int subsequenceCount(string S, string T)
+    {
+      //Your code here
+      vector<vector<int>> dp(S.length(),vector<int> (T.length(),-1));
+      return solve(0,0,S,T,dp);
+    }
+};
