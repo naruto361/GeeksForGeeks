@@ -1,0 +1,29 @@
+class Solution{
+  public:
+  bool ispali(string &s)
+  {
+      if(s.length()<2) return true;
+      int i=0,j=s.length()-1;
+      while(i<j)
+      {
+          if(s[i]!=s[j]) return false;
+          i++;j--;
+      }
+      return true;
+  }
+    int palindromeSubStrs(string s) {
+        unordered_set<string> st;
+        int l=s.length();
+        for(int i=0;i<l;i++)
+        {
+            for(int j=i;j<l;j++)
+            {
+                if(s[i]!=s[j]) continue;
+                string t=s.substr(i,j-i+1);
+                if(ispali(t)) st.insert(t);
+            }
+        }
+        return st.size();
+        // code here
+    }
+};
