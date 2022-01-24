@@ -1,0 +1,48 @@
+class Solution{
+public:
+    vector<int> nextPermutation(int N, vector<int> arr){
+        // code here
+        if(N==1) return arr;
+        if(N==2) {
+            swap(arr[0],arr[1]);
+            return arr;
+        }
+        bool inc=true,dec=true;
+        for(int i=1;i<N;i++)
+        {
+            if(arr[i]>arr[i-1]) dec=false;
+            if(arr[i]<arr[i-1]) inc=false;
+            if(!dec && !inc) break;
+        }
+        if(dec)
+        {
+            sort(arr.begin(),arr.end());
+            return arr;
+        }
+        if(inc)
+        {
+            swap(arr[N-2],arr[N-1]);
+            return arr;
+        }
+        // now normal case
+        int i;
+        for(i=N-2;i>=0;i--)
+        {
+            if(arr[i]<arr[i+1]) break;
+        }
+        int num=INT_MAX;
+        int idx;
+        for(int j=i+1;j<N;j++)
+        {
+            if(arr[j]>arr[i])
+            {
+                num=min(num,arr[j]);
+                if(num==arr[j]) idx=j;
+            }
+        }
+        swap(arr[i],arr[idx]);
+        sort(arr.begin()+i+1,arr.end());
+        return arr;
+        
+    }
+};
