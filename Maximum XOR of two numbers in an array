@@ -1,0 +1,66 @@
+class Solution
+{
+    public:
+    struct Node{
+        Node* zero;
+        Node* one;
+    };
+    Node* root=new Node();
+    void insert(int num)
+    {
+        Node* ptr=root;
+        for(int i=30;i>=0;i--)
+        {
+            if( (1<<i)&num )
+            {
+                if(!ptr->one) ptr->one=new Node();
+                ptr=ptr->one;
+            }
+            else
+            {
+                if( !ptr->zero) ptr->zero=new Node();
+                ptr=ptr->zero;
+            }
+        }
+    }
+    int solve(int num)
+    {
+        int res=0;
+        Node* ptr=root;
+        for(int i=30;i>=0;i--)
+        {
+            if( (1<<i)&num)
+            {
+                if(ptr->zero)
+                {
+                    res += (1<<i);
+                    ptr=ptr->zero;
+                }
+                else ptr=ptr->one;
+            }
+            else
+            {
+                if(ptr->one)
+                {
+                    res += (1<<i);
+                    ptr=ptr->one;
+                }
+                else ptr=ptr->zero;
+            }
+        }
+        return res;
+    }
+    int max_xor(int arr[] , int n)
+    {
+        //code here
+        int maxi=0;
+        for(int i=0;i<n;i++) insert(arr[i]);
+        for(int i=0;i<n;i++) 
+        {
+            int res=solve(arr[i]);
+            if(res>maxi) maxi=res;
+        }
+        return maxi;
+    }
+    
+};
