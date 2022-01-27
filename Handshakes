@@ -1,0 +1,22 @@
+class Solution{
+public:
+int solve(vector<int> &dp,int N)
+{
+    if(dp[N] != -1) return dp[N];
+    int res=0;
+    for(int i=2;i<=N;i+=2)
+    {
+        int x1 = i-2;
+        int x2 = N-i;
+        res += solve(dp,x1)*solve(dp,x2);
+    }
+    return dp[N]=res;
+}
+    int count(int N){
+        // code here
+        if(N&1) return 0;
+        vector<int> dp(N+1,-1);
+        dp[0]=1,dp[2]=1;
+        return solve(dp,N);
+    }
+};
