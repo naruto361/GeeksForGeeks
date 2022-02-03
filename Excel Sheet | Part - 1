@@ -1,0 +1,17 @@
+class Solution{
+    public:
+    string ExcelColumn(int N)
+    {
+        // Your code goes here
+        string ans;
+        //int x=1;
+        while(N>0)
+        {
+            if(N%26==0) ans+='Z';
+            else ans += char(N%26 +'A'-1);
+            N=(N-1)/26;
+        }
+        reverse(ans.begin() , ans.end());
+        return ans;
+    }
+};
