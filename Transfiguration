@@ -1,0 +1,31 @@
+class Solution{
+    
+    public:
+    int transfigure (string A, string B)
+    {
+    	// Your code goes here
+    	int l=A.length();
+    	if(l!=B.length()) return -1;
+    	int f1[52]={0},f2[52]={0};
+    	for(char &c:A)
+    	{
+    	    if(c>='a' && c<='z') f1[c-'a']++;
+    	    else f1[c-'A'+26]++;
+    	}
+    	for(char &c:B)
+    	{
+    	    if(c>='a' && c<='z') f2[c-'a']++;
+    	    else f2[c-'A'+26]++;
+    	}
+    	for(int i=0;i<52;i++) if(f1[i]!=f2[i]) return -1;
+    	int i=l-1,j=l-1;
+    	int ans =0;
+    	while(i>=0)
+    	{
+    	    if(A[i]!=B[j]) i--,ans++;
+    	    else i--,j--;
+    	}
+    	return ans;
+    	
+    }
+};
