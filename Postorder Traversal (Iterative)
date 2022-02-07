@@ -1,0 +1,20 @@
+class Solution{
+    public:
+    vector<int> postOrder(Node* node) {
+        // code here
+        if(!node) return {};
+        vector<int> ans;
+        stack<Node*> st;
+        st.push(node);
+        while(!st.empty())
+        {
+            Node* k=st.top();
+            st.pop();
+            if(k->left) st.push(k->left);
+            if(k->right) st.push(k->right);
+            ans.push_back(k->data);
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
