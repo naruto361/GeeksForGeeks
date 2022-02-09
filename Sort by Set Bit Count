@@ -1,0 +1,26 @@
+bool sortbyfunc(pair<int,int> &a,pair<int,int> &b)
+    {
+        if(a.first==b.first) return a.second<b.second;
+        return a.first>b.first;
+    }
+    class Solution{
+    
+    public:
+    
+    void sortBySetBitCount(int arr[], int n)
+    {
+        // Your code goes here
+        vector<pair<int,int>> temp;
+        for(int i=0;i<n;i++)
+        {
+            temp.push_back({__builtin_popcount(arr[i]),i});
+        }
+        sort(temp.begin(),temp.end(),sortbyfunc);
+        int x[n];
+        for(int i=0;i<n;i++) x[i]=arr[i];
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=x[temp[i].second];
+        }
+    }
+};
