@@ -1,0 +1,17 @@
+class Solution{
+public:
+    int xorCal(int k){
+        // code here
+        if(k==1) return 2;
+        if(k%2==0) return -1;
+        if((k&(k+1))==0)
+        {
+            return k/2;
+        }
+        // 3 - 1,2
+        // 7 - 3,4
+        // 15 - 7,8
+        // 31 - 15,16
+        return -1;
+    }
+};
