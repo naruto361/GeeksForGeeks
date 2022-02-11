@@ -1,0 +1,26 @@
+class Solution
+{
+  public:
+    string newIPAdd (string s)
+    {
+        //code here.
+        string ans;
+        string temp;
+        bool start=true;
+        for(char &c:s)
+        {
+            if(start && c=='0') continue;
+            temp+=c;
+            start=false;
+            if(c=='.') {
+                start=true;
+                if(temp==".") ans+='0';
+                ans+=temp;
+                temp.clear();
+            }
+        }
+        if(temp.length()==0) temp+='0';
+        ans+=temp;
+        return ans;
+    }
+};
