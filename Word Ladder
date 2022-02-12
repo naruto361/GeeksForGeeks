@@ -1,0 +1,35 @@
+int wordLadderLength(string startWord, string targetWord, vector<string>& wordList) {
+        // Code here
+        if(find(wordList.begin(),wordList.end(),targetWord)==wordList.end()) return 0;
+        set<string> st;
+        for(auto &i:wordList) st.insert(i);
+        queue<string> q;
+        q.push(startWord);
+        int ans =0;
+        while(!q.empty())
+        {
+            int n=q.size();
+            ans++;
+            while(n--)
+            {
+                string curr=q.front();
+                q.pop();
+                for(int i=0;i<curr.length();i++)
+                {
+                    string temp=curr;
+                    for(char c='a';c<='z';c++)
+                    {
+                        temp[i]=c;
+                        if(temp==curr) continue;
+                        if(temp==targetWord) return ans+1;
+                        if(st.find(temp)!=st.end())
+                        {
+                            q.push(temp);
+                            st.erase(temp);
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
