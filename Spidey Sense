@@ -1,0 +1,45 @@
+class Solution{
+
+    public:
+    vector<int> dx={-1,0,1,0};
+    vector<int> dy={0,1,0,-1};
+    vector<vector<int> > findDistance(vector<vector<char> >& matrix, int M, int N) 
+    { 
+        // Your code goes here
+        vector<vector<int>> ans(M,vector<int> (N,-1));
+        queue<pair<int,int>> q;
+        for(int i=0;i<M;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(matrix[i][j]=='B')
+                {
+                    q.push({i,j});
+                    ans[i][j]=0;
+                }
+            }
+        }
+        while(!q.empty())
+        {
+            int x=q.front().first;
+            int y=q.front().second;
+            q.pop();
+            int newx,newy;
+            for(int i=0;i<4;i++)
+            {
+                newx=x+dx[i];
+                newy=y+dy[i];
+                if(newx<0 || newy<0 || newx>=M || newy>=N) continue;
+                if(matrix[newx][newy]=='O')
+                {
+                    if(ans[newx][newy]==-1)
+                    {
+                        ans[newx][newy]=1+ans[x][y];
+                        q.push({newx,newy});
+                    }
+                }
+            }
+        }
+        return ans;
+    } 
+};
