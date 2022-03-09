@@ -1,0 +1,12 @@
+class Solution {
+  public:
+    //Function to return maximum path product from any node in a tree.
+    long long findMaxScore(Node* root)
+    {
+        // Your code goes here
+        if(!root) return 1;
+        if(!root->left && !root->right) return root->data;
+        return max(root->data*findMaxScore(root->right) ,
+        root->data*findMaxScore(root->left));
+    }
+};
