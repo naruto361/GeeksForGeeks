@@ -1,0 +1,39 @@
+
+class Solution
+{
+    public:
+    long long getMaxArea(long long arr[], int n)
+    {
+        //  **************************  USE LEFTSMALL AND RIGHTSMALL  ************************
+        stack<int> st;
+        vector<int> leftsmall(n,-1);
+        vector<int> rightsmall(n,n);
+        for(int i=0;i<n;i++)
+        {
+            while(!st.empty() && arr[i]<arr[st.top()])
+            {
+                rightsmall[st.top()]=i;
+                st.pop();
+            }
+            if(!st.empty()) leftsmall[i]=st.top();
+            //else leftsmall[i]=st.top();
+            st.push(i);
+        }
+        // for(int i=0;i<n;i++)
+        // {
+        //     cout<<leftsmall[i]<<" ";
+        // }
+        // cout<<'\n';
+        // for(int i=0;i<n;i++)
+        // {
+        //     cout<<rightsmall[i]<<" ";
+        // }
+        // cout<<'\n';
+        long long ans=0;
+        for(int i=0;i<n;i++)
+        {
+            ans = max(ans, (rightsmall[i]-leftsmall[i]-1)*arr[i]);
+        }
+        return ans;
+    }
+};
