@@ -1,0 +1,42 @@
+class Solution{
+public:
+    string LCP(string ar[], int n)
+    {
+        // code here
+        // string ans;
+        // for(int i=0;i<ar[0].length();i++)
+        // {
+        //     char c =ar[0][i];
+        //     for(int j=1;j<n;j++)
+        //     {
+        //         if(ar[j][i]!=c)
+        //         {
+        //             if(ans.length()==0) return "-1";
+        //             return ans;
+        //         }
+        //     }
+        //     ans +=ar[0][i];
+            
+        // }
+        // return ans;
+        sort(ar,ar+n);
+        string x1=ar[0];
+        string x2=ar[n-1];
+        int idx=0;
+        string ans;
+        while(idx<x1.length() && idx<x2.length())
+        {
+            if(x1[idx]==x2[idx])
+            {
+                ans += x1[idx];
+                idx++;
+            }
+            else 
+            {
+                if(ans.length()==0) return "-1";
+                else return ans;
+            }
+        }
+        return ans;
+    }
+};
