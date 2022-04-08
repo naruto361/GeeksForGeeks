@@ -1,0 +1,22 @@
+class Solution{
+public:
+    vector<int> print_next_greater_freq(int arr[],int n)
+    {
+        // code here
+        unordered_map<int,int> mp;
+        for(int i=0;i<n;i++) mp[arr[i]]++;
+        stack<pair<int,int>> st;
+        // index and frequency
+        vector<int> ans(n,-1);
+        for(int i=0;i<n;i++)
+        {
+            while(!st.empty() && mp[arr[i]]>st.top().second)//mp[arr[st.top().first]])
+            {
+                ans[st.top().first]=arr[i];
+                st.pop();
+            }
+            st.push({i,mp[arr[i]]});
+        }
+        return ans;
+    }
+};
