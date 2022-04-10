@@ -1,0 +1,25 @@
+class Solution{
+public:
+    int minOperations(int *a,int n)
+    {
+        // ************************* //
+        priority_queue<int,vector<int> ,greater<int>> pq;
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            if(pq.empty()) pq.push(a[i]);
+            else if(a[i]<=pq.top()) pq.push(a[i]);
+            else
+            {
+                ans += a[i]-pq.top();
+                pq.pop();
+                pq.push(a[i]); // for a[i]
+                pq.push(a[i]); // for pq.top()
+                // chote element ko bada bana raha hu 
+                // taki next element h array ke wo "a[i]<=pq.top()"
+                // is condition me aa sake jyadatar
+            }
+        }
+        return ans;
+    }
+};
