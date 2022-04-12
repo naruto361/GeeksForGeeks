@@ -1,0 +1,28 @@
+int isNegativeWeightCycle(int n, vector<vector<int>>edges){
+	    // Code here
+	    vector<int> dist(n,1e8);
+	    dist[0]=0;
+	    for(int i=0;i<n;i++)
+	    {
+	        bool update=false;
+	        for(auto &e:edges)
+	        {
+	            int u=e[0],v=e[1],cost=e[2];
+	            if(dist[v]>dist[u]+cost)
+	            {
+	                dist[v]=dist[u]+cost;
+	                update=true;
+	            }
+	        }
+	        if(!update) break;
+	    }
+	    for(auto &e:edges)
+	        {
+	            int u=e[0],v=e[1],cost=e[2];
+	            if(dist[v]>dist[u]+cost)
+	            {
+	                return true;
+	            }
+	        }
+	        return false;
+	}
