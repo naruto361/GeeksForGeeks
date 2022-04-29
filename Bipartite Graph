@@ -1,0 +1,27 @@
+class Solution {
+    private:
+    bool dfs(int V,vector<int> adj[],vector<bool> &vis,vector<int> &color,int c,int idx)
+    {
+        vis[idx]=true;
+        color[idx]=c;
+        c^=1;
+        for(auto &child:adj[idx])
+        {
+            if(vis[child] && color[child]!=c) return false;
+            if(!vis[child] && !dfs(V,adj,vis,color,c,child)) return false;
+        }
+        return true;
+    }
+public:
+	bool isBipartite(int V, vector<int>adj[]){
+	    // Code here
+	    vector<bool> vis(V,false);
+	    vector<int> color(V,-1);
+	    for(int i=0;i<V;i++)
+	    {
+	        if(!vis[i] && !dfs(V,adj,vis,color,0,i)) return false;
+	    }
+	    return true;
+	}
+
+};
