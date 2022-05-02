@@ -1,0 +1,42 @@
+class Solution{
+    private:
+    void dfs(int i,vector<int> &dist,vector<bool> &vis,vector<vector<int>> &adj)
+    {
+        queue<int> q;
+        q.push(i);
+        vis[i]=true;
+        dist[i]=0;
+        while(!q.empty())
+        {
+            int k=q.front();
+            q.pop();
+            for(auto &j:adj[k])
+            {
+                if(vis[j]) continue;
+                dist[j]=1+dist[k];
+                vis[j]=true;
+                q.push(j);
+            }
+        }
+    }
+public:
+    int partyHouse(int N, vector<vector<int>> &adj){
+        // code here
+        vector<int> dist(N+1,0);
+        vector<bool> vis(N+1,false);
+        int ans=INT_MAX;
+        for(int i=1;i<=N;i++)
+        {
+            dfs(i,dist,vis,adj);
+            int maxi=0;
+            //cout<<i<<" : ";
+            for(int j=1;j<=N;j++) maxi=max(maxi,dist[j]);//cout<<dist[j]<<" ";
+            //cout<<'\n';
+            ans=min(ans,maxi);
+            for(int j=1;j<=N;j++) {dist[j]=0;vis[j]=false;}
+            //dist.resize(N+1,0);
+            //vis.resize(N+1,false);
+        }
+        return ans;
+    }
+};
