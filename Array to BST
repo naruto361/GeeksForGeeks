@@ -1,0 +1,19 @@
+class Solution {
+    private:
+    void solve(vector<int> &nums,vector<int> &ans,int low,int high)
+    {
+        if(low>high) return ;
+        int mid=(low+high)/2;
+        ans.push_back(nums[mid]);
+        solve(nums,ans,low,mid-1);
+        solve(nums,ans,mid+1,high);
+    }
+public:
+    vector<int> sortedArrayToBST(vector<int>& nums) {
+        // Code here
+        vector<int> ans;
+        int l=0,h=nums.size()-1;
+        solve(nums,ans,l,h);
+        return ans;
+    }
+};
