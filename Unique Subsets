@@ -1,0 +1,28 @@
+```cpp
+class Solution
+{
+    private:
+    void solve(vector<vector<int>> &ans,vector<int> &arr,int i,vector<int> &temp)
+    {
+        ans.push_back(temp);
+        for(int j=i;j<arr.size();j++)
+        {
+            if(j>i && arr[j]==arr[j-1]) continue;
+            //solve(ans,arr,j+1,temp);
+            temp.push_back(arr[j]);
+            solve(ans,arr,j+1,temp);
+            temp.pop_back();
+        }
+    }
+    public:
+    //Function to find all possible unique subsets.
+    vector<vector<int> > AllSubsets(vector<int> arr, int n)
+    {
+        sort(arr.begin(),arr.end());
+        vector<vector<int>> ans;
+        vector<int> temp;
+        solve(ans,arr,0,temp);
+        return ans;
+    }
+};
+```
