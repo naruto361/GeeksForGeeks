@@ -1,0 +1,27 @@
+class Solution
+{
+	public:
+	    vector<string> ans;
+	    void solve(string &S,int idx)
+	    {
+	        if(idx==S.length())
+	        {
+	            ans.push_back(S);
+	            return ;
+	        }
+	        for(int i=idx;i<S.length();i++)
+	        {
+	            if(i>idx && S[i]==S[idx]) continue;
+	            swap(S[i],S[idx]);
+	            solve(S,idx+1);
+	        }
+	        for(int j=S.length()-1;j>idx;j--) 
+	            swap(S[j],S[idx]);
+	    }
+		vector<string>find_permutation(string S)
+		{
+		    sort(S.begin(),S.end());
+		    solve(S,0);
+		    return ans;
+		}
+};
