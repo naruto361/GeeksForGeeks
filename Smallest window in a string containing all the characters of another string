@@ -1,0 +1,39 @@
+bool check(vector<int> &f,vector<int> &temp)
+    {
+        for(int k=0;k<26;k++)
+        {
+            if(temp[k]<f[k]) return false;
+        }
+        return true;
+    }
+    string smallestWindow (string s, string p)
+    {
+        vector<int> f(26,0);
+        for(char &c:p) f[c-'a']++;
+        bool ok=false;
+        int start=-1,end=-1;
+        int minlen=INT_MAX;
+        vector<int> temp(26,0);
+        int l=0;
+        for(int r=0;r<s.length();r++)
+        {
+            temp[s[r]-'a']++;
+            while(check(f,temp))
+            {
+                ok=true;
+                if(r-l+1<minlen)
+                {
+                    minlen=r-l+1;
+                    start=l;
+                    end=r;
+                }
+                minlen=min(minlen,r-l+1);
+                temp[s[l]-'a']--;
+                l++;
+            }
+        }
+        if(!ok) return "-1";
+        string ans;
+        for(int i=start;i<=end;i++) ans+=s[i];
+        return ans;
+    }
