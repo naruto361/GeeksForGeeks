@@ -1,0 +1,37 @@
+int search(string pat, string txt) {
+	    if(txt.length()<pat.length()) return 0;
+	    if(txt.length() == pat.length()) return pat==txt;
+	    vector<int> ff(26,0);
+	    for(char &c:pat) ff[c-'a']++;
+	    vector<vector<int>> f(txt.length(),vector<int> (26,0));
+	    //int f[pat.length()][26]={0};
+	    f[0][txt[0]-'a']=1;
+	    for(int i=1;i<txt.length();i++)
+	    {
+	        for(int j=0;j<26;j++) f[i][j]=f[i-1][j];
+	        f[i][txt[i]-'a']++;
+	    }
+	    int ans=0;
+	    bool ok=true;
+	    for(int j=0;j<26;j++)
+	    {
+	        if(f[pat.length()-1][j] != ff[j])
+	        {
+	            ok=false;break;
+	        }
+	    }
+	    if(ok) ++ans;
+	    for(int i=pat.length();i<txt.length();i++)
+	    {
+	        bool ok1=true;
+	        for(int j=0;j<26;j++)
+	        {
+	            if((f[i][j] - f[i-pat.length()][j]) != ff[j])
+	            {
+	                ok1=false;break;
+	            }
+	        }
+	        if(ok1) ++ans;
+	    }
+	    return ans;
+	}
