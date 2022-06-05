@@ -1,0 +1,26 @@
+class Solution{
+public:
+    bool solve(long N,long H[],long A[],long M,long mid,long L)
+    {
+        long sum = 0;
+        for(long i=0;i<N;i++)
+        {
+            
+            long k=H[i] + mid*A[i];
+            if(k>=L) sum += k;
+            if(sum>=M) return true;
+        }
+        return sum>=M;
+    }
+    long buzzTime(long N, long M, long L, long H[], long A[])
+    {
+        long l=0,r=1e9;
+        while(l<r)
+        {
+            long mid = l+ (r-l)/2;
+            if(solve(N,H,A,M,mid,L)) r=mid;
+            else l=mid+1;
+        }
+        return l;
+    }
+};
