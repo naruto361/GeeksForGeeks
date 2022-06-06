@@ -1,0 +1,23 @@
+long long countKdivPairs(int A[], int n, int K)
+    {
+        long long ans=0;
+        long long rem[K]={0};
+        for(int i=0;i<n;i++) rem[A[i]%K]++;
+        if(rem[0]>1)
+        {
+            ans += (rem[0]*(rem[0]-1))/2;
+        }
+        int i=1,j=K-1;
+        if(K%2==0)
+        {
+            K/=2;
+            ans += (rem[K]*(rem[K]-1))/2;
+        }
+        while(i<j)
+        {
+            ans += rem[i]*rem[j];
+            i++;
+            j--;
+        }
+        return ans;
+    }
