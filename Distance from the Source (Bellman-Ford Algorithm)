@@ -1,0 +1,19 @@
+vector <int> bellman_ford(int V, vector<vector<int>> adj, int S) {
+        vector<int> dist(V,1e8);
+        dist[S]=0;
+        for(int i=0;i<V;i++)
+        {
+            bool change=false;
+            for(auto &j:adj)
+            {
+                int u=j[0] , v=j[1] , d=j[2];
+                if(dist[u]!=1e8 && dist[v]>dist[u]+d)
+                {
+                    change=true;
+                    dist[v]=dist[u]+d;
+                }
+            }
+            if(!change) break;
+        }
+        return dist;
+    }
