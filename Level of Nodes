@@ -1,0 +1,30 @@
+class Solution
+{
+	public:
+	//Function to find the level of node X.
+	int nodeLevel(int V, vector<int> adj[], int X) 
+	{
+	    if(X>=V) return -1;
+	    vector<int> dist(V,-1);
+	    dist[0]=0;
+	    queue<int> q;
+	    q.push(0);
+	    while(!q.empty())
+	    {
+	        int n=q.size();
+	        while(n--)
+	        {
+	            int node=q.front();q.pop();
+	            for(auto &child:adj[node])
+	            {
+	                if(dist[child]==-1)
+	                {
+	                    dist[child]=1+dist[node];
+	                    q.push(child);
+	                }
+	            }
+	        }
+	    }
+	    return dist[X];
+	}
+};
