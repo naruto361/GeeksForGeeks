@@ -1,0 +1,51 @@
+class Solution {
+public:
+    vector<int> dx={0,1,0,-1};
+    vector<int> dy={1,0,-1,0};
+    bool isValid(int i,int j,vector<vector<int>> &grid)
+    {
+        if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || grid[i][j]!=1)
+            return false;
+        return true;
+    }
+    int helpaterp(vector<vector<int>> grid)
+    {
+        //code here
+        queue<pair<int,int>> q;
+        int fresh=0;
+        for(int i=0;i<grid.size();i++)
+        {
+            for(int j=0;j<grid[0].size();j++)
+            {
+                if(grid[i][j]==1) fresh++;
+                else if(grid[i][j]==2) q.push({i,j});
+            }
+        }
+        int time=-1;
+        while(!q.empty())
+        {
+            int n=q.size();
+            while(n--)
+            {
+                int x=q.front().first , y=q.front().second;
+                q.pop();
+                for(int k=0;k<4;k++)
+                {
+                    int newx=x+dx[k] , newy=y+dy[k];
+                    if(isValid(newx,newy,grid))
+                    {
+                        grid[newx][newy]=2;
+                        fresh--;
+                        q.push({newx,newy});
+                    }
+                    
+                }
+            }
+            time++;
+        }
+        if(fresh==0) return time;
+        if(time==-1) return 0;
+        return -1;
+        
+    }
+};
