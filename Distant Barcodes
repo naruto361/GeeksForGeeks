@@ -1,0 +1,31 @@
+bool sortbyfunc(pair<int,int> &a,pair<int,int> &b)
+{
+    return a.second>b.second;
+}
+class Solution {
+public:
+    vector<int> rearrangeBarcodes(vector<int>& barcodes) {
+        unordered_map<int,int> mp;
+        for(auto &i:barcodes) mp[i]++;
+        vector<pair<int,int>> v;
+        int maxi=0;
+        for(auto &i:mp) 
+        {
+            v.push_back({i.first,i.second});
+            maxi=max(maxi,i.second);
+        }
+        sort(v.begin(),v.end(),sortbyfunc);
+        vector<int> ans(barcodes.size());
+        int i=0;
+        for(int j=0;j<v.size();j++)
+        {
+            while(v[j].second--)
+            {
+                ans[i]=v[j].first;
+                i+=2;
+                if(i>=barcodes.size()) i=1;
+            }
+        }
+        return ans;
+    }
+};
