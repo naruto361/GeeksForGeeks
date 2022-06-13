@@ -1,0 +1,19 @@
+class Solution{
+    public:
+    Node* build(int &rootIdx,int in[],int pre[],int n,int l,int r)
+    {
+        if(l>r) return NULL;
+        int pivot=l;
+        while(in[pivot]!=pre[rootIdx]) pivot++;
+        rootIdx++;
+        Node* temp=new Node(in[pivot]);
+        temp->left=build(rootIdx,in,pre,n,l,pivot-1);
+        temp->right=build(rootIdx,in,pre,n,pivot+1,r);
+        return temp;
+    }
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        int rootIdx=0;
+       return build(rootIdx,in,pre,n,0,n-1);
+    }
+};
