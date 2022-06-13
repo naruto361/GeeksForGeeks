@@ -1,0 +1,16 @@
+unordered_map<int,int> mp;
+Node* build(int &rootIdx,int in[],int post[],int n,int l,int r)
+{
+    if(l>r) return NULL;
+    int pivot=mp[post[rootIdx]];
+    rootIdx--;
+    Node* temp=new Node(in[pivot]);
+    temp->right=build(rootIdx,in,post,n,pivot+1,r);
+    temp->left=build(rootIdx,in,post,n,l,pivot-1);
+    return temp;
+}
+Node *buildTree(int in[], int post[], int n) {
+    for(int i=0;i<n;i++) mp[in[i]]=i;
+    int rootIdx=n-1;
+    return build(rootIdx,in,post,n,0,n-1);
+}
