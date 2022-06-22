@@ -1,0 +1,21 @@
+int fun(string &s) {
+        int mod=1e9+7;
+        int a=0,ab=0,abc=0;
+        for(char &c:s)
+        {
+                if(c=='a')
+                {
+                    a=((2*a)%mod + 1)%mod;
+                }
+                else if(c=='b')
+                {
+                    ab=((2*ab)%mod + a%mod )%mod;
+                }
+                else
+                {
+                    abc=((2*abc)%mod + ab%mod )%mod;
+                }
+            
+        }
+        return abc;
+    }
