@@ -1,0 +1,30 @@
+int wildCard(string pattern,string str)
+    {
+        int m=pattern.length(),n=str.length();
+        vector<vector<bool>> dp(m+1,vector<bool> (n+1,false));
+        for(int i=m-1;i>=0;i--)
+        {
+            if(pattern[i]=='*') dp[i][n]=true;
+            else break;
+        }
+        dp[m][n]=true;
+        for(int i=m-1;i>=0;i--)
+        {
+            for(int j=n-1;j>=0;j--)
+            {
+                if(pattern[i]=='?')
+                {
+                    if(dp[i+1][j+1]) dp[i][j]=true;
+                }
+                if(pattern[i]>='a' && pattern[i]<='z')
+                {
+                    if(pattern[i]==str[j] && dp[i+1][j+1]) dp[i][j]=true;
+                }
+                if(pattern[i]=='*')
+                {
+                    dp[i][j]=(dp[i+1][j]|dp[i][j+1]);
+                }
+            }
+        }
+        return dp[0][0];
+    }
