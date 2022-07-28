@@ -1,0 +1,17 @@
+class Solution{
+public:
+    int knots(int M, int N, int K){
+        int mod=1e9+7;
+        int n=max(M,N)+1;
+        long dp[n][n]={0};
+        for(int i=0;i<n;i++)
+        {
+            dp[i][0]=1;dp[i][i]=1;
+            for(int j=1;j<i;j++)
+            {
+                dp[i][j] = (dp[i-1][j]%mod + dp[i-1][j-1]%mod )%mod;
+            }
+        }
+        return (dp[M][K]%mod * dp[N][K]%mod);
+    }
+};
