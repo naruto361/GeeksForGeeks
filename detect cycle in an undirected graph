@@ -1,0 +1,23 @@
+/* Same As Redundant Connection - LEETCODE */
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        vector<int> par(V);
+        for(int i=0;i<V;i++) par[i]=i;
+        for(int i=0;i<V;i++)
+        {
+            for(int j=0;j<adj[i].size();j++)
+            {
+                int u=i,v=adj[i][j];
+                if(v<u) continue;
+                while(u!=par[u]) u=par[u];
+                while(v!=par[v]) v=par[v];
+                if(u==v) return true;
+                else par[v]=u;
+            }
+        }
+        return false;
+    }
+};
