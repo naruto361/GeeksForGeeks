@@ -1,0 +1,59 @@
+class LRUCache
+{
+    private:
+
+    public:
+    //Constructor for initializing the cache capacity with the given value.
+    int sz,capacity;
+    map<int,int> mp;
+    list<int> ls;
+    map<int,list<int>::iterator> address;
+    LRUCache(int cap)
+    {
+        // code here
+        capacity=cap;
+        sz=0;
+    }
+    
+    //Function to return value corresponding to the key.
+    int get(int key)
+    {
+        // your code here
+        if(mp.find(key)==mp.end()) return -1;
+        
+        int val=mp[key];
+        list<int>::iterator t=address[key];
+        ls.erase(t);
+        ls.push_front(key);
+        address[key]=ls.begin();
+        return val;
+        
+    }
+    
+    //Function for storing key-value pair.
+    void set(int key, int value)
+    {
+        // your code here   
+        if(mp.find(key)!=mp.end())
+        {
+            sz--;
+            list<int>::iterator t=address[key];
+            ls.erase(t);
+            address.erase(key);
+            mp.erase(key);
+        }
+        if(sz==capacity)
+        {
+            sz--;
+            int t=ls.back();
+            ls.pop_back();
+            mp.erase(t);
+            address.erase(t);
+        }
+        sz++;
+        ls.push_front(key);
+        address[key]=ls.begin();
+        mp[key]=value;
+        
+    }
+};
