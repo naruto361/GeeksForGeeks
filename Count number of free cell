@@ -1,0 +1,29 @@
+class Solution{
+  public:
+  vector<long long int> countZero(int n, int k, vector<vector<int>>& arr){
+      //Code Here
+      #define ll long long int
+      unordered_map<int,int> row,col;
+      int rowCount=0,colCount=0;
+      int zeros=n*n;
+      vector<ll> dp;
+      for(auto &k:arr)
+      {
+          int x=k[0],y=k[1];
+          if(row.find(x)==row.end())
+          {
+              zeros-=n-colCount;
+              rowCount++;
+              row[x]=1;
+          }
+          if(col.find(y)==col.end())
+          {
+              zeros-=n-rowCount;
+              colCount++;
+              col[y]=1;
+          }
+          dp.push_back(zeros);
+      }
+      return dp;
+  }
+};
